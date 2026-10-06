@@ -1,16 +1,44 @@
-# React + Vite
+# TaskFlow Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multi-page admin dashboard for a fictional freelance designer, built with React and React Router. Shows project stats, earnings charts, and a filterable project table.
 
-Currently, two official plugins are available:
+**Live demo:** [https://willvviana.github.io/taskflow-dashboard/](https://willvviana.github.io/taskflow-dashboard/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What it does
 
-## React Compiler
+This is a demo dashboard. There's no backend and no real data — everything runs on a mock data file. The point is the layout, routing, charting, and responsive behavior.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Three pages:
 
-## Expanding the ESLint configuration
+- **Overview** — Stat cards, monthly earnings bar chart, task-breakdown pie chart, recent activity list
+- **Projects** — Sortable table (desktop) / card list (mobile) with status filtering
+- **Settings** — Profile form with editable fields
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech stack
+
+- **React 19** — UI
+- **React Router 7** — Client-side routing
+- **Recharts** — Bar and pie charts
+- **Tailwind CSS 4** — Styling
+- **Vite 8** — Build tool
+
+## Why these choices
+
+**Recharts over Chart.js.** Recharts is built for React — it uses components, not imperative canvas calls. The API fits how React works. Chart.js is more general-purpose but fights React's render model.
+
+**HashRouter over BrowserRouter.** GitHub Pages doesn't support client-side route fallbacks. If someone refreshes on `/projects`, GitHub looks for a file at that path and 404s. HashRouter (`/#/projects`) avoids this with zero server config. In a real app with a backend, BrowserRouter would be the right call.
+
+**Tailwind over plain CSS.** For a dashboard with a lot of utility classes and responsive breakpoints, Tailwind's `sm:`, `md:`, `lg:` prefixes cut CSS file size and keep styles close to the markup. For a landing page, plain CSS might be cleaner.
+
+## Run locally
+
+```bash
+# Clone
+git clone https://github.com/willvviana/taskflow-dashboard.git
+cd taskflow-dashboard
+
+# Install
+npm install
+
+# Start dev server
+npm run dev
